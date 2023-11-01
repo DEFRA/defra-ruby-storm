@@ -1,6 +1,6 @@
 # DefraRuby::Storm
 
-![Build Status](https://github.com/DEFRA/defra-ruby-storm/workflows/CI/badge.svg?branch=main)
+![Build Status](https://github.com/DEFRA/defra-ruby-storm/workflows/CI/badge.svg)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_defra-ruby-storm&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_defra-ruby-storm)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_defra-ruby-storm&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_defra-ruby-storm)
 [![Gem Version](https://badge.fury.io/rb/defra_ruby_storm.svg)](https://badge.fury.io/rb/defra_ruby_storm)
