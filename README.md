@@ -1,9 +1,8 @@
 # DefraRuby::Storm
 
 ![Build Status](https://github.com/DEFRA/defra-ruby-storm/workflows/CI/badge.svg?branch=main)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_defra-ruby-storm&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_defra-ruby-aws)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_defra-ruby-storm&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_defra-ruby-aws)
-[![security](https://hakiri.io/github/DEFRA/defra-ruby-storm/main.svg)](https://hakiri.io/github/DEFRA/defra-ruby-aws/main)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_defra-ruby-storm&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_defra-ruby-storm)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_defra-ruby-storm&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_defra-ruby-storm)
 [![Gem Version](https://badge.fury.io/rb/defra_ruby_storm.svg)](https://badge.fury.io/rb/defra_ruby_storm)
 [![Licence](https://img.shields.io/badge/Licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
