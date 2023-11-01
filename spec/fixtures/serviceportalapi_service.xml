@@ -1,0 +1,811 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://redwoodtech.com/ws/NGware/NGwareService" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="NGware" targetNamespace="http://redwoodtech.com/ws/NGware/NGwareService">
+<wsp:Policy wsu:Id="WSHttpBinding_NGwareService_policy">
+<wsp:ExactlyOne>
+<wsp:All>
+<sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy>
+<sp:TransportToken>
+<wsp:Policy>
+<sp:HttpsToken RequireClientCertificate="false"/>
+</wsp:Policy>
+</sp:TransportToken>
+<sp:AlgorithmSuite>
+<wsp:Policy>
+<sp:Basic256/>
+</wsp:Policy>
+</sp:AlgorithmSuite>
+<sp:Layout>
+<wsp:Policy>
+<sp:Strict/>
+</wsp:Policy>
+</sp:Layout>
+<sp:IncludeTimestamp/>
+</wsp:Policy>
+</sp:TransportBinding>
+<sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy>
+<sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+<wsp:Policy>
+<sp:WssUsernameToken10/>
+</wsp:Policy>
+</sp:UsernameToken>
+</wsp:Policy>
+</sp:SignedSupportingTokens>
+<sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy/>
+</sp:Wss11>
+<sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy>
+<sp:MustSupportIssuedTokens/>
+<sp:RequireClientEntropy/>
+<sp:RequireServerEntropy/>
+</wsp:Policy>
+</sp:Trust10>
+<wsaw:UsingAddressing/>
+</wsp:All>
+</wsp:ExactlyOne>
+</wsp:Policy>
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://redwoodtech.com/ws/NGware/NGwareTypes" elementFormDefault="qualified" targetNamespace="http://redwoodtech.com/ws/NGware/NGwareTypes">
+<xs:element name="assignRoutePlanRequest" type="tns:assignRoutePlanRequest"/>
+<xs:complexType name="assignRoutePlanRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="DRRoute" type="xs:boolean"/>
+<xs:element minOccurs="0" maxOccurs="1" name="RoutePlanName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="assignRoutePlanResponse" type="tns:assignRoutePlanResponse"/>
+<xs:complexType name="assignRoutePlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="checkNumberRequest" type="tns:checkNumberRequest"/>
+<xs:complexType name="checkNumberRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="checkNumberResponse" type="tns:checkNumberResponse"/>
+<xs:complexType name="checkNumberResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="NumberInfo" type="tns:NumberInfo"/>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="NumberInfo">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="NumberActive" type="xs:boolean"/>
+<xs:element minOccurs="0" maxOccurs="1" name="RoutePlanName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="DRRoutePlanName" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="DRActive" type="xs:boolean"/>
+<xs:element minOccurs="1" maxOccurs="1" name="LastUpdated" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="checkRoutePlanRequest" type="tns:checkRoutePlanRequest"/>
+<xs:complexType name="checkRoutePlanRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="RoutePlanName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="checkRoutePlanResponse" type="tns:checkRoutePlanResponse"/>
+<xs:complexType name="checkRoutePlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+<xs:element minOccurs="0" maxOccurs="1" name="RoutePlan" type="tns:RoutePlan"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="RoutePlan">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="RouteType" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="RouteMapping" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="SIPTrunk" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="Voicemail" type="xs:boolean"/>
+<xs:element minOccurs="1" maxOccurs="1" name="Whisper" type="xs:boolean"/>
+<xs:element minOccurs="1" maxOccurs="1" name="Reusable" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="createRoutePlanRequest" type="tns:createRoutePlanRequest"/>
+<xs:complexType name="createRoutePlanRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="RoutePlanName" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="RouteType" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="RouteMapping" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="SIPTrunkName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="createRoutePlanResponse" type="tns:createRoutePlanResponse"/>
+<xs:complexType name="createRoutePlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="deactivateNumberRequest" type="tns:deactivateNumberRequest"/>
+<xs:complexType name="deactivateNumberRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="deactivateNumberResponse" type="tns:deactivateNumberResponse"/>
+<xs:complexType name="deactivateNumberResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getNumbersRequest" type="tns:getNumbersRequest"/>
+<xs:complexType name="getNumbersRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getNumbersResponse" type="tns:getNumbersResponse"/>
+<xs:complexType name="getNumbersResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Number" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getRoutePlansRequest" type="tns:getRoutePlansRequest"/>
+<xs:complexType name="getRoutePlansRequest"/>
+<xs:element name="getRoutePlansResponse" type="tns:getRoutePlansResponse"/>
+<xs:complexType name="getRoutePlansResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="RoutePlanName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="setDRModeRequest" type="tns:setDRModeRequest"/>
+<xs:complexType name="setDRModeRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="DRActive" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="setDRModeResponse" type="tns:setDRModeResponse"/>
+<xs:complexType name="setDRModeResponse">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:integer"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="createVMProfileRequest" type="tns:createVMProfileRequest"/>
+<xs:complexType name="createVMProfileRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfile" type="tns:VMProfile"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="VMProfile">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="ProfileDescription" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="DisablePIN" type="xs:boolean"/>
+<xs:element minOccurs="0" maxOccurs="1" name="PIN" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="MaxMessages" type="xs:int"/>
+<xs:element minOccurs="1" maxOccurs="1" name="SendEmailNotifications" type="xs:boolean"/>
+<xs:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="IncludeEmailAttachments" type="xs:boolean"/>
+<xs:element minOccurs="1" maxOccurs="1" name="IntroductionPrompt">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="default"/>
+<xs:enumeration value="personal"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element minOccurs="0" maxOccurs="1" name="ServiceType" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="createVMProfileResponse" type="tns:createVMProfileResponse"/>
+<xs:complexType name="createVMProfileResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="updateVMProfileRequest" type="tns:updateVMProfileRequest"/>
+<xs:complexType name="updateVMProfileRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfile" type="tns:VMProfile"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="updateVMProfileResponse" type="tns:updateVMProfileResponse"/>
+<xs:complexType name="updateVMProfileResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="deleteVMProfileRequest" type="tns:deleteVMProfileRequest"/>
+<xs:complexType name="deleteVMProfileRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="deleteVMProfileResponse" type="tns:deleteVMProfileResponse"/>
+<xs:complexType name="deleteVMProfileResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="checkVMProfileRequest" type="tns:checkVMProfileRequest"/>
+<xs:complexType name="checkVMProfileRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="checkVMProfileResponse" type="tns:checkVMProfileResponse"/>
+<xs:complexType name="checkVMProfileResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfile" type="tns:VMProfile"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getVMProfilesRequest" type="tns:getVMProfilesRequest"/>
+<xs:complexType name="getVMProfilesRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileNamePrefix" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getVMProfilesResponse" type="tns:getVMProfilesResponse"/>
+<xs:complexType name="getVMProfilesResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileNames" type="tns:ArrayOfString"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ArrayOfString">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="VMProfileName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="deleteVMMessagesRequest" type="tns:deleteVMMessagesRequest"/>
+<xs:complexType name="deleteVMMessagesRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="MessageIDs" type="tns:ArrayOfInt"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ArrayOfInt">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="MessageID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="deleteVMMessagesResponse" type="tns:deleteVMMessagesResponse"/>
+<xs:complexType name="deleteVMMessagesResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="InvalidMessageIDs" type="tns:ArrayOfInt"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="downloadVMGreetingRequest" type="tns:downloadVMGreetingRequest"/>
+<xs:complexType name="downloadVMGreetingRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="downloadVMGreetingResponse" type="tns:downloadVMGreetingResponse"/>
+<xs:complexType name="downloadVMGreetingResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="File" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="downloadVMMessageRequest" type="tns:downloadVMMessageRequest"/>
+<xs:complexType name="downloadVMMessageRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="MessageID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="downloadVMMessageResponse" type="tns:downloadVMMessageResponse"/>
+<xs:complexType name="downloadVMMessageResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="File" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="downloadRawVMMessageRequest" type="tns:downloadRawVMMessageRequest"/>
+<xs:complexType name="downloadRawVMMessageRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="MessageID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="downloadRawVMMessageResponse" type="tns:downloadRawVMMessageResponse"/>
+<xs:complexType name="downloadRawVMMessageResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="File" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="uploadVMGreetingRequest" type="tns:uploadVMGreetingRequest"/>
+<xs:complexType name="uploadVMGreetingRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="File" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="uploadVMGreetingResponse" type="tns:uploadVMGreetingResponse"/>
+<xs:complexType name="uploadVMGreetingResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getVMMessagesRequest" type="tns:getVMMessagesRequest"/>
+<xs:complexType name="getVMMessagesRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="VMProfileName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getVMMessagesResponse" type="tns:getVMMessagesResponse"/>
+<xs:complexType name="getVMMessagesResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="Messages" type="tns:ArrayOfVMMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ArrayOfVMMessage">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Message" type="tns:VMMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="VMMessage">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="MessageID" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="CallID" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="CLI" type="xs:string"/>
+<xs:element minOccurs="1" maxOccurs="1" name="Timestamp" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getUserAccessTokenRequest" type="tns:getUserAccessTokenRequest"/>
+<xs:complexType name="getUserAccessTokenRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="ServiceName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="ActionName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getUserAccessTokenResponse" type="tns:getUserAccessTokenResponse"/>
+<xs:complexType name="getUserAccessTokenResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="1" maxOccurs="1" name="UserID" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="Token" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getUserDetailsRequest" type="tns:getUserDetailsRequest"/>
+<xs:complexType name="getUserDetailsRequest">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="UserID" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getUserDetailsResponse" type="tns:getUserDetailsResponse"/>
+<xs:complexType name="getUserDetailsResponse">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int"/>
+<xs:element minOccurs="1" maxOccurs="1" name="UserID" type="xs:int"/>
+<xs:element minOccurs="0" maxOccurs="1" name="UserName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="FirstName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="LastName" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="HomeTel" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="WorkTel" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="WorkEmail" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="Mobile" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="AlternativeNumber" type="xs:string"/>
+<xs:element minOccurs="0" maxOccurs="1" name="PersonalEmail" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="assignRoutePlanRequest1">
+<wsdl:part xmlns:q1="http://redwoodtech.com/ws/NGware/NGwareTypes" name="assignRoutePlanRequest" element="q1:assignRoutePlanRequest"/>
+</wsdl:message>
+<wsdl:message name="assignRoutePlanResponse1">
+<wsdl:part xmlns:q2="http://redwoodtech.com/ws/NGware/NGwareTypes" name="assignRoutePlanResponse" element="q2:assignRoutePlanResponse"/>
+</wsdl:message>
+<wsdl:message name="checkNumberRequest1">
+<wsdl:part xmlns:q3="http://redwoodtech.com/ws/NGware/NGwareTypes" name="checkNumberRequest" element="q3:checkNumberRequest"/>
+</wsdl:message>
+<wsdl:message name="checkNumberResponse1">
+<wsdl:part xmlns:q4="http://redwoodtech.com/ws/NGware/NGwareTypes" name="checkNumberResponse" element="q4:checkNumberResponse"/>
+</wsdl:message>
+<wsdl:message name="checkRoutePlanRequest1">
+<wsdl:part xmlns:q5="http://redwoodtech.com/ws/NGware/NGwareTypes" name="checkRoutePlanRequest" element="q5:checkRoutePlanRequest"/>
+</wsdl:message>
+<wsdl:message name="checkRoutePlanResponse1">
+<wsdl:part xmlns:q6="http://redwoodtech.com/ws/NGware/NGwareTypes" name="checkRoutePlanResponse" element="q6:checkRoutePlanResponse"/>
+</wsdl:message>
+<wsdl:message name="createRoutePlanRequest1">
+<wsdl:part xmlns:q7="http://redwoodtech.com/ws/NGware/NGwareTypes" name="createRoutePlanRequest" element="q7:createRoutePlanRequest"/>
+</wsdl:message>
+<wsdl:message name="createRoutePlanResponse1">
+<wsdl:part xmlns:q8="http://redwoodtech.com/ws/NGware/NGwareTypes" name="createRoutePlanResponse" element="q8:createRoutePlanResponse"/>
+</wsdl:message>
+<wsdl:message name="deactivateNumberRequest1">
+<wsdl:part xmlns:q9="http://redwoodtech.com/ws/NGware/NGwareTypes" name="deactivateNumberRequest" element="q9:deactivateNumberRequest"/>
+</wsdl:message>
+<wsdl:message name="deactivateNumberResponse1">
+<wsdl:part xmlns:q10="http://redwoodtech.com/ws/NGware/NGwareTypes" name="deactivateNumberResponse" element="q10:deactivateNumberResponse"/>
+</wsdl:message>
+<wsdl:message name="getNumbersRequest1">
+<wsdl:part xmlns:q11="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getNumbersRequest" element="q11:getNumbersRequest"/>
+</wsdl:message>
+<wsdl:message name="getNumbersResponse1">
+<wsdl:part xmlns:q12="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getNumbersResponse" element="q12:getNumbersResponse"/>
+</wsdl:message>
+<wsdl:message name="getRoutePlansRequest1">
+<wsdl:part xmlns:q13="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getRoutePlansRequest" element="q13:getRoutePlansRequest"/>
+</wsdl:message>
+<wsdl:message name="getRoutePlansResponse1">
+<wsdl:part xmlns:q14="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getRoutePlansResponse" element="q14:getRoutePlansResponse"/>
+</wsdl:message>
+<wsdl:message name="setDRModeRequest1">
+<wsdl:part xmlns:q15="http://redwoodtech.com/ws/NGware/NGwareTypes" name="setDRModeRequest" element="q15:setDRModeRequest"/>
+</wsdl:message>
+<wsdl:message name="setDRModeResponse1">
+<wsdl:part xmlns:q16="http://redwoodtech.com/ws/NGware/NGwareTypes" name="setDRModeResponse" element="q16:setDRModeResponse"/>
+</wsdl:message>
+<wsdl:message name="createVMProfileRequest1">
+<wsdl:part xmlns:q17="http://redwoodtech.com/ws/NGware/NGwareTypes" name="createVMProfileRequest" element="q17:createVMProfileRequest"/>
+</wsdl:message>
+<wsdl:message name="createVMProfileResponse1">
+<wsdl:part xmlns:q18="http://redwoodtech.com/ws/NGware/NGwareTypes" name="createVMProfileResponse" element="q18:createVMProfileResponse"/>
+</wsdl:message>
+<wsdl:message name="updateVMProfileRequest1">
+<wsdl:part xmlns:q19="http://redwoodtech.com/ws/NGware/NGwareTypes" name="updateVMProfileRequest" element="q19:updateVMProfileRequest"/>
+</wsdl:message>
+<wsdl:message name="updateVMProfileResponse1">
+<wsdl:part xmlns:q20="http://redwoodtech.com/ws/NGware/NGwareTypes" name="updateVMProfileResponse" element="q20:updateVMProfileResponse"/>
+</wsdl:message>
+<wsdl:message name="deleteVMProfileRequest1">
+<wsdl:part xmlns:q21="http://redwoodtech.com/ws/NGware/NGwareTypes" name="deleteVMProfileRequest" element="q21:deleteVMProfileRequest"/>
+</wsdl:message>
+<wsdl:message name="deleteVMProfileResponse1">
+<wsdl:part xmlns:q22="http://redwoodtech.com/ws/NGware/NGwareTypes" name="deleteVMProfileResponse" element="q22:deleteVMProfileResponse"/>
+</wsdl:message>
+<wsdl:message name="checkVMProfileRequest1">
+<wsdl:part xmlns:q23="http://redwoodtech.com/ws/NGware/NGwareTypes" name="checkVMProfileRequest" element="q23:checkVMProfileRequest"/>
+</wsdl:message>
+<wsdl:message name="checkVMProfileResponse1">
+<wsdl:part xmlns:q24="http://redwoodtech.com/ws/NGware/NGwareTypes" name="checkVMProfileResponse" element="q24:checkVMProfileResponse"/>
+</wsdl:message>
+<wsdl:message name="getVMProfilesRequest1">
+<wsdl:part xmlns:q25="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getVMProfilesRequest" element="q25:getVMProfilesRequest"/>
+</wsdl:message>
+<wsdl:message name="getVMProfilesResponse1">
+<wsdl:part xmlns:q26="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getVMProfilesResponse" element="q26:getVMProfilesResponse"/>
+</wsdl:message>
+<wsdl:message name="deleteVMMessagesRequest1">
+<wsdl:part xmlns:q27="http://redwoodtech.com/ws/NGware/NGwareTypes" name="deleteVMMessagesRequest" element="q27:deleteVMMessagesRequest"/>
+</wsdl:message>
+<wsdl:message name="deleteVMMessagesResponse1">
+<wsdl:part xmlns:q28="http://redwoodtech.com/ws/NGware/NGwareTypes" name="deleteVMMessagesResponse" element="q28:deleteVMMessagesResponse"/>
+</wsdl:message>
+<wsdl:message name="downloadVMGreetingRequest1">
+<wsdl:part xmlns:q29="http://redwoodtech.com/ws/NGware/NGwareTypes" name="downloadVMGreetingRequest" element="q29:downloadVMGreetingRequest"/>
+</wsdl:message>
+<wsdl:message name="downloadVMGreetingResponse1">
+<wsdl:part xmlns:q30="http://redwoodtech.com/ws/NGware/NGwareTypes" name="downloadVMGreetingResponse" element="q30:downloadVMGreetingResponse"/>
+</wsdl:message>
+<wsdl:message name="downloadVMMessageRequest1">
+<wsdl:part xmlns:q31="http://redwoodtech.com/ws/NGware/NGwareTypes" name="downloadVMMessageRequest" element="q31:downloadVMMessageRequest"/>
+</wsdl:message>
+<wsdl:message name="downloadVMMessageResponse1">
+<wsdl:part xmlns:q32="http://redwoodtech.com/ws/NGware/NGwareTypes" name="downloadVMMessageResponse" element="q32:downloadVMMessageResponse"/>
+</wsdl:message>
+<wsdl:message name="downloadRawVMMessageRequest1">
+<wsdl:part xmlns:q33="http://redwoodtech.com/ws/NGware/NGwareTypes" name="downloadRawVMMessageRequest" element="q33:downloadRawVMMessageRequest"/>
+</wsdl:message>
+<wsdl:message name="downloadRawVMMessageResponse1">
+<wsdl:part xmlns:q34="http://redwoodtech.com/ws/NGware/NGwareTypes" name="downloadRawVMMessageResponse" element="q34:downloadRawVMMessageResponse"/>
+</wsdl:message>
+<wsdl:message name="uploadVMGreetingRequest1">
+<wsdl:part xmlns:q35="http://redwoodtech.com/ws/NGware/NGwareTypes" name="uploadVMGreetingRequest" element="q35:uploadVMGreetingRequest"/>
+</wsdl:message>
+<wsdl:message name="uploadVMGreetingResponse1">
+<wsdl:part xmlns:q36="http://redwoodtech.com/ws/NGware/NGwareTypes" name="uploadVMGreetingResponse" element="q36:uploadVMGreetingResponse"/>
+</wsdl:message>
+<wsdl:message name="getVMMessagesRequest1">
+<wsdl:part xmlns:q37="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getVMMessagesRequest" element="q37:getVMMessagesRequest"/>
+</wsdl:message>
+<wsdl:message name="getVMMessagesResponse1">
+<wsdl:part xmlns:q38="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getVMMessagesResponse" element="q38:getVMMessagesResponse"/>
+</wsdl:message>
+<wsdl:message name="getUserAccessTokenRequest1">
+<wsdl:part xmlns:q39="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getUserAccessTokenRequest" element="q39:getUserAccessTokenRequest"/>
+</wsdl:message>
+<wsdl:message name="getUserAccessTokenResponse1">
+<wsdl:part xmlns:q40="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getUserAccessTokenResponse" element="q40:getUserAccessTokenResponse"/>
+</wsdl:message>
+<wsdl:message name="getUserDetailsRequest1">
+<wsdl:part xmlns:q41="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getUserDetailsRequest" element="q41:getUserDetailsRequest"/>
+</wsdl:message>
+<wsdl:message name="getUserDetailsResponse1">
+<wsdl:part xmlns:q42="http://redwoodtech.com/ws/NGware/NGwareTypes" name="getUserDetailsResponse" element="q42:getUserDetailsResponse"/>
+</wsdl:message>
+<wsdl:portType name="NGwareService">
+<wsdl:operation name="assignRoutePlan">
+<wsdl:input wsaw:Action="AssignRoutePlan" name="assignRoutePlanRequest1" message="tns:assignRoutePlanRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/assignRoutePlanResponse" name="assignRoutePlanResponse1" message="tns:assignRoutePlanResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="checkNumber">
+<wsdl:input wsaw:Action="CheckNumber" name="checkNumberRequest1" message="tns:checkNumberRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/checkNumberResponse" name="checkNumberResponse1" message="tns:checkNumberResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="checkRoutePlan">
+<wsdl:input wsaw:Action="CheckRoutePlan" name="checkRoutePlanRequest1" message="tns:checkRoutePlanRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/checkRoutePlanResponse" name="checkRoutePlanResponse1" message="tns:checkRoutePlanResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="createRoutePlan">
+<wsdl:input wsaw:Action="CreateRoutePlan" name="createRoutePlanRequest1" message="tns:createRoutePlanRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/createRoutePlanResponse" name="createRoutePlanResponse1" message="tns:createRoutePlanResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="deactivateNumber">
+<wsdl:input wsaw:Action="DeactivateNumber" name="deactivateNumberRequest1" message="tns:deactivateNumberRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/deactivateNumberResponse" name="deactivateNumberResponse1" message="tns:deactivateNumberResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="getNumbers">
+<wsdl:input wsaw:Action="GetNumbers" name="getNumbersRequest1" message="tns:getNumbersRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getNumbersResponse" name="getNumbersResponse1" message="tns:getNumbersResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="getRoutePlans">
+<wsdl:input wsaw:Action="GetRoutePlans" name="getRoutePlansRequest1" message="tns:getRoutePlansRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getRoutePlansResponse" name="getRoutePlansResponse1" message="tns:getRoutePlansResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="setDRMode">
+<wsdl:input wsaw:Action="SetDRMode" name="setDRModeRequest1" message="tns:setDRModeRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/setDRModeResponse" name="setDRModeResponse1" message="tns:setDRModeResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="createVMProfile">
+<wsdl:input wsaw:Action="CreateVMProfile" name="createVMProfileRequest1" message="tns:createVMProfileRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/createVMProfileResponse" name="createVMProfileResponse1" message="tns:createVMProfileResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="updateVMProfile">
+<wsdl:input wsaw:Action="UpdateVMProfile" name="updateVMProfileRequest1" message="tns:updateVMProfileRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/updateVMProfileResponse" name="updateVMProfileResponse1" message="tns:updateVMProfileResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="deleteVMProfile">
+<wsdl:input wsaw:Action="DeleteVMProfile" name="deleteVMProfileRequest1" message="tns:deleteVMProfileRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/deleteVMProfileResponse" name="deleteVMProfileResponse1" message="tns:deleteVMProfileResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="checkVMProfile">
+<wsdl:input wsaw:Action="CheckVMProfile" name="checkVMProfileRequest1" message="tns:checkVMProfileRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/checkVMProfileResponse" name="checkVMProfileResponse1" message="tns:checkVMProfileResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="getVMProfiles">
+<wsdl:input wsaw:Action="GetVMProfiles" name="getVMProfilesRequest1" message="tns:getVMProfilesRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getVMProfilesResponse" name="getVMProfilesResponse1" message="tns:getVMProfilesResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="deleteVMMessages">
+<wsdl:input wsaw:Action="DeleteVMMessages" name="deleteVMMessagesRequest1" message="tns:deleteVMMessagesRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/deleteVMMessagesResponse" name="deleteVMMessagesResponse1" message="tns:deleteVMMessagesResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="downloadVMGreeting">
+<wsdl:input wsaw:Action="DownloadVMGreeting" name="downloadVMGreetingRequest1" message="tns:downloadVMGreetingRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/downloadVMGreetingResponse" name="downloadVMGreetingResponse1" message="tns:downloadVMGreetingResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="downloadVMMessage">
+<wsdl:input wsaw:Action="DownloadVMMessage" name="downloadVMMessageRequest1" message="tns:downloadVMMessageRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/downloadVMMessageResponse" name="downloadVMMessageResponse1" message="tns:downloadVMMessageResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="downloadRawVMMessage">
+<wsdl:input wsaw:Action="DownloadRawVMMessage" name="downloadRawVMMessageRequest1" message="tns:downloadRawVMMessageRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/downloadRawVMMessageResponse" name="downloadRawVMMessageResponse1" message="tns:downloadRawVMMessageResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="uploadVMGreeting">
+<wsdl:input wsaw:Action="UploadVMGreeting" name="uploadVMGreetingRequest1" message="tns:uploadVMGreetingRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/uploadVMGreetingResponse" name="uploadVMGreetingResponse1" message="tns:uploadVMGreetingResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="getVMMessages">
+<wsdl:input wsaw:Action="GetVMMessages" name="getVMMessagesRequest1" message="tns:getVMMessagesRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getVMMessagesResponse" name="getVMMessagesResponse1" message="tns:getVMMessagesResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="getUserAccessToken">
+<wsdl:input wsaw:Action="getUserAccessToken" name="getUserAccessTokenRequest1" message="tns:getUserAccessTokenRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getUserAccessTokenResponse" name="getUserAccessTokenResponse1" message="tns:getUserAccessTokenResponse1"/>
+</wsdl:operation>
+<wsdl:operation name="getUserDetails">
+<wsdl:input wsaw:Action="getUserDetails" name="getUserDetailsRequest1" message="tns:getUserDetailsRequest1"/>
+<wsdl:output wsaw:Action="http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getUserDetailsResponse" name="getUserDetailsResponse1" message="tns:getUserDetailsResponse1"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="WSHttpBinding_NGwareService" type="tns:NGwareService">
+<wsp:PolicyReference URI="#WSHttpBinding_NGwareService_policy"/>
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="assignRoutePlan">
+<soap12:operation soapAction="AssignRoutePlan" style="document"/>
+<wsdl:input name="assignRoutePlanRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="assignRoutePlanResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="checkNumber">
+<soap12:operation soapAction="CheckNumber" style="document"/>
+<wsdl:input name="checkNumberRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="checkNumberResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="checkRoutePlan">
+<soap12:operation soapAction="CheckRoutePlan" style="document"/>
+<wsdl:input name="checkRoutePlanRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="checkRoutePlanResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="createRoutePlan">
+<soap12:operation soapAction="CreateRoutePlan" style="document"/>
+<wsdl:input name="createRoutePlanRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="createRoutePlanResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="deactivateNumber">
+<soap12:operation soapAction="DeactivateNumber" style="document"/>
+<wsdl:input name="deactivateNumberRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="deactivateNumberResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNumbers">
+<soap12:operation soapAction="GetNumbers" style="document"/>
+<wsdl:input name="getNumbersRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getNumbersResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getRoutePlans">
+<soap12:operation soapAction="GetRoutePlans" style="document"/>
+<wsdl:input name="getRoutePlansRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getRoutePlansResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="setDRMode">
+<soap12:operation soapAction="SetDRMode" style="document"/>
+<wsdl:input name="setDRModeRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="setDRModeResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="createVMProfile">
+<soap12:operation soapAction="CreateVMProfile" style="document"/>
+<wsdl:input name="createVMProfileRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="createVMProfileResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="updateVMProfile">
+<soap12:operation soapAction="UpdateVMProfile" style="document"/>
+<wsdl:input name="updateVMProfileRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="updateVMProfileResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="deleteVMProfile">
+<soap12:operation soapAction="DeleteVMProfile" style="document"/>
+<wsdl:input name="deleteVMProfileRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="deleteVMProfileResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="checkVMProfile">
+<soap12:operation soapAction="CheckVMProfile" style="document"/>
+<wsdl:input name="checkVMProfileRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="checkVMProfileResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getVMProfiles">
+<soap12:operation soapAction="GetVMProfiles" style="document"/>
+<wsdl:input name="getVMProfilesRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getVMProfilesResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="deleteVMMessages">
+<soap12:operation soapAction="DeleteVMMessages" style="document"/>
+<wsdl:input name="deleteVMMessagesRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="deleteVMMessagesResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="downloadVMGreeting">
+<soap12:operation soapAction="DownloadVMGreeting" style="document"/>
+<wsdl:input name="downloadVMGreetingRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="downloadVMGreetingResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="downloadVMMessage">
+<soap12:operation soapAction="DownloadVMMessage" style="document"/>
+<wsdl:input name="downloadVMMessageRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="downloadVMMessageResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="downloadRawVMMessage">
+<soap12:operation soapAction="DownloadRawVMMessage" style="document"/>
+<wsdl:input name="downloadRawVMMessageRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="downloadRawVMMessageResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="uploadVMGreeting">
+<soap12:operation soapAction="UploadVMGreeting" style="document"/>
+<wsdl:input name="uploadVMGreetingRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="uploadVMGreetingResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getVMMessages">
+<soap12:operation soapAction="GetVMMessages" style="document"/>
+<wsdl:input name="getVMMessagesRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getVMMessagesResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getUserAccessToken">
+<soap12:operation soapAction="getUserAccessToken" style="document"/>
+<wsdl:input name="getUserAccessTokenRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getUserAccessTokenResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getUserDetails">
+<soap12:operation soapAction="getUserDetails" style="document"/>
+<wsdl:input name="getUserDetailsRequest1">
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getUserDetailsResponse1">
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="NGware">
+<wsdl:port name="WSHttpBinding_NGwareService" binding="tns:WSHttpBinding_NGwareService">
+<soap12:address location="https://www.timeforstorm.com/ServicePortalAPI/Service.svc"/>
+<wsa10:EndpointReference>
+<wsa10:Address>https://www.timeforstorm.com/ServicePortalAPI/Service.svc</wsa10:Address>
+</wsa10:EndpointReference>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

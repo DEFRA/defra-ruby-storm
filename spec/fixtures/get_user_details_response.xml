@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <s:Header>
+    <a:Action s:mustUnderstand="1">http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getUserDetailsResponse</a:Action>
+    <a:RelatesTo>urn:uuid:e57bca30-0b5b-4b4a-a20f-502a31f15e5f</a:RelatesTo>
+    <o:Security xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" s:mustUnderstand="1">
+      <u:Timestamp u:Id="_0">
+        <u:Created>2023-10-27T11:28:31.505Z</u:Created>
+        <u:Expires>2023-10-27T11:33:31.505Z</u:Expires>
+      </u:Timestamp>
+    </o:Security>
+  </s:Header>
+  <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <getUserDetailsResponse xmlns="http://redwoodtech.com/ws/NGware/NGwareTypes">
+      <Code>0</Code>
+      <UserID>1234</UserID>
+      <UserName>Test</UserName>
+      <FirstName>Test</FirstName>
+      <LastName>Test</LastName>
+      <HomeTel/>
+      <WorkTel/>
+      <WorkEmail/>
+      <Mobile/>
+      <AlternativeNumber/>
+      <PersonalEmail/>
+    </getUserDetailsResponse>
+  </s:Body>
+</s:Envelope>

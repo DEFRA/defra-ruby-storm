@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <s:Header>
+    <a:Action s:mustUnderstand="1">http://redwoodtech.com/ws/NGware/NGwareService/NGwareService/getUserDetailsResponse</a:Action>
+    <a:RelatesTo>urn:uuid:f87a5c4d-b7b0-42da-9543-eb968ca54d6f</a:RelatesTo>
+    <o:Security xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" s:mustUnderstand="1">
+      <u:Timestamp u:Id="_0">
+        <u:Created>2023-10-27T13:56:44.351Z</u:Created>
+        <u:Expires>2023-10-27T14:01:44.351Z</u:Expires>
+      </u:Timestamp>
+    </o:Security>
+  </s:Header>
+  <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <getUserDetailsResponse xmlns="http://redwoodtech.com/ws/NGware/NGwareTypes">
+      <Code>2</Code>
+      <UserID>0</UserID>
+    </getUserDetailsResponse>
+  </s:Body>
+</s:Envelope>

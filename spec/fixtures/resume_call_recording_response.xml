@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <s:Header>
+    <a:Action s:mustUnderstand="1">http://redcentrex.redwoodtech.com/calls/RedCentrexCallsSoap/RecordingResponse</a:Action>
+    <a:RelatesTo>urn:uuid:08a21324-cf86-4bfb-b6ad-0e1744ab7994</a:RelatesTo>
+    <o:Security xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" s:mustUnderstand="1">
+      <u:Timestamp u:Id="_0">
+        <u:Created>2023-10-27T14:29:26.716Z</u:Created>
+        <u:Expires>2023-10-27T14:34:26.716Z</u:Expires>
+      </u:Timestamp>
+    </o:Security>
+  </s:Header>
+  <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <RecordingResponse xmlns="http://redcentrex.redwoodtech.com/calls">
+      <Result>0</Result>
+    </RecordingResponse>
+  </s:Body>
+</s:Envelope>
