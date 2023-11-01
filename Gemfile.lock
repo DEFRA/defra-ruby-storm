@@ -23,6 +23,7 @@ GEM
       rubocop-rake
       rubocop-rspec
     diff-lcs (1.5.0)
+    docile (1.4.0)
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
@@ -47,6 +48,8 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nokogiri (1.15.4-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     nori (2.6.0)
     parallel (1.23.0)
@@ -106,6 +109,12 @@ GEM
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
       wasabi (~> 3.4)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     timeout (0.4.0)
     unicode-display_width (2.5.0)
     wasabi (3.8.0)
@@ -128,6 +137,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   rubocop (~> 1.21)
   rubocop-rspec
+  simplecov (~> 0.22.0)
   webmock (~> 3.4)
 
 BUNDLED WITH

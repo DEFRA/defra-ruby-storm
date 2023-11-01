@@ -9,3 +9,9 @@
 
 # rspec failure tracking
 .rspec_status
+
+# simplecov https://github.com/colszowka/simplecov
+coverage
+
+.env
+.env.local
