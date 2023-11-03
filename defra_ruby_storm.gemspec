@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.version = DefraRuby::Storm::VERSION
   spec.authors = ["Defra"]
   spec.email = ["leonid.brujev@defra.gov.uk"]
+  spec.license = "The Open Government Licence (OGL) Version 3"
 
   spec.summary = "Ruby client for Storm Web Services API"
   spec.homepage = "https://github.com/DEFRA/defra-ruby-storm"
