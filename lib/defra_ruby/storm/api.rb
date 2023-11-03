@@ -8,7 +8,7 @@ module DefraRuby
       end
 
       def get_user_details(username)
-        response = @client.call(:get_user_details, message: { "ngw:UserName": "CarrierTest" },
+        response = @client.call(:get_user_details, message: { "ngw:UserName": username },
                                                    message_tag: :getUserDetailsRequest)
         unless response.http.code == 200 && response.body[:get_user_details_response][:code] == "0"
           handle_error "Failed to get user details for username: #{username}"
