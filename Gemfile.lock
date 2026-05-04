@@ -16,7 +16,7 @@ GEM
     builder (3.2.4)
     crack (0.4.5)
       rexml
-    date (3.3.3)
+    date (3.5.1)
     defra_ruby_style (0.4.0)
       rubocop (>= 1.0, < 2.0)
       rubocop-factory_bot
@@ -38,12 +38,12 @@ GEM
       net-pop
       net-smtp
     mini_mime (1.1.5)
-    net-imap (0.4.3)
+    net-imap (0.4.24)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
     net-smtp (0.4.0)
       net-protocol
@@ -115,7 +115,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    timeout (0.4.0)
+    timeout (0.6.1)
     unicode-display_width (2.5.0)
     wasabi (3.8.0)
       addressable
